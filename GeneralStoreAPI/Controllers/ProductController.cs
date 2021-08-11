@@ -3,6 +3,7 @@ using GeneralStoreAPI.Models.ProductModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,31 +23,36 @@ namespace GeneralStoreAPI.Controllers
             {
                 return BadRequest();
             }
-         
+
             var productEntity = new Product
             {
+                
                 Name = product.Name,
                 Cost = product.Cost,
                 NumberInInventory = product.NumberInInventory,
-               
+
             };
 
             var transaction = await _context.Transactions.FindAsync(product.TransactionID);
 
             if (transaction != null)
             {
-               
+
                 productEntity.Transactions.Add(transaction);
             }
 
-            
             _context.Products.Add(productEntity);
+
 
             if (await _context.SaveChangesAsync() > 0)
             {
-                ((System.Data.Entity.Validation.DbEntityValidationException)$Exception).EntityValidationErrors;
+
                 return Ok();
             }
+
+
+
+
             return InternalServerError();
         }
 
