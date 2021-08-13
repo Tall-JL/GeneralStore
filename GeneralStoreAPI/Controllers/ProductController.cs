@@ -26,7 +26,7 @@ namespace GeneralStoreAPI.Controllers
 
             var productEntity = new Product
             {
-                
+                SKU = product.SKU,
                 Name = product.Name,
                 Cost = product.Cost,
                 NumberInInventory = product.NumberInInventory,

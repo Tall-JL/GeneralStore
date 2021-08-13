@@ -9,6 +9,8 @@ namespace GeneralStoreAPI.Models.ProductModels
     public class ProductCreate
     {
         [Required]
+        public string SKU { get; set; }
+        [Required]
         public string Name { get; set; }
         [Required]
         public double Cost { get; set; }

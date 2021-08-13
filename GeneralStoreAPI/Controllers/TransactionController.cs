@@ -26,7 +26,8 @@ namespace GeneralStoreAPI.Controllers
             var customer = await _context.Customers.FindAsync(transaction.Id);
             if (customer != null)
             {
-                transaction.Customers.Add(customer);
+                //transaction.Customers.Add(customer);
+                customer.Transactions.Add(transaction);
             }
 
             var product = await _context.Products.FindAsync(transaction.SKU);
@@ -34,7 +35,8 @@ namespace GeneralStoreAPI.Controllers
             {
                 if (product.IsInStock == true && product.NumberInInventory >= transaction.ItemCount)
                 {
-                    _context.Products.Remove(product);
+                    var productLeft = product.NumberInInventory - transaction.ItemCount;
+                    product.NumberInInventory = productLeft;
                 }
             }
 
@@ -55,6 +57,27 @@ namespace GeneralStoreAPI.Controllers
 
             return Ok(transactions);
         }
+
+        //[HttpGet]
+        //public async Task<IHttpActionResult> GetAll([FromUri] int pageNumber)
+        //{
+        //    var transactions = await _context.Transactions.ToListAsync();
+
+
+
+        //    if (pageNumber >= 1 && pageNumber != default)
+        //    {
+        //        int pageSize = 5;
+        //        var result = transactions.Skip(pageNumber * pageSize).Take(pageSize);
+        //        foreach (var trans in result)
+        //        {
+        //            return Ok($"{trans.CustomerId}");
+
+        //        }
+        //    }
+        //    return NotFound();
+
+        //}
 
         [HttpGet]
         public async Task<IHttpActionResult> Get([FromUri] int id)
