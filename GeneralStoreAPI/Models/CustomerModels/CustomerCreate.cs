@@ -13,6 +13,6 @@ namespace GeneralStoreAPI.Models.CustomerModels
         [Required]
         public string LastName { get; set; }
 
-        public int? TransactionID { get; set; }
+        //public int? TransactionID { get; set; }
     }
 }

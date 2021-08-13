@@ -29,13 +29,6 @@ namespace GeneralStoreAPI.Controllers
                 LastName = customer.LastName,
             };
 
-            var transaction = await _context.Transactions.FindAsync(customer.TransactionID);
-
-            if (transaction != null)
-            {
-                customerEntity.Transactions.Add(transaction);
-            }
-
             _context.Customers.Add(customerEntity);
 
             if (await _context.SaveChangesAsync() > 0)

@@ -16,7 +16,7 @@ namespace GeneralStoreAPI.Models.ProductModels
         public double Cost { get; set; }
         [Required]
         public int NumberInInventory { get; set; }
-        public int? TransactionID { get; set; }
+        //public int? TransactionID { get; set; }
 
 
     }

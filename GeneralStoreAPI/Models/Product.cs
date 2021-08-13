@@ -30,6 +30,6 @@ namespace GeneralStoreAPI.Models
                 }
             } 
         }
-        public virtual List<Transaction> Transactions { get; set; } = new List<Transaction>();
+        //public virtual List<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }

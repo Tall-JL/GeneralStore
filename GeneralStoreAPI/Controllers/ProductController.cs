@@ -33,25 +33,13 @@ namespace GeneralStoreAPI.Controllers
 
             };
 
-            var transaction = await _context.Transactions.FindAsync(product.TransactionID);
-
-            if (transaction != null)
-            {
-
-                productEntity.Transactions.Add(transaction);
-            }
-
             _context.Products.Add(productEntity);
-
 
             if (await _context.SaveChangesAsync() > 0)
             {
 
                 return Ok();
             }
-
-
-
 
             return InternalServerError();
         }
