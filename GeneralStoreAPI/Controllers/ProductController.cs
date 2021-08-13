@@ -37,7 +37,6 @@ namespace GeneralStoreAPI.Controllers
 
             if (await _context.SaveChangesAsync() > 0)
             {
-
                 return Ok();
             }
 

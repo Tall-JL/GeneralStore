@@ -25,7 +25,7 @@ namespace GeneralStoreAPI.Models
         [Required]
         public int ItemCount { get; set; }
         public DateTime DateOfTransaction { get { return DateTime.Now; } }
-       // public virtual List<Product> Products { get; set; } = new List<Product>();
+       //public virtual List<Product> Products { get; set; } = new List<Product>();
         //public virtual List<Customer> Customers { get; set; } = new List<Customer>();
     }
 }

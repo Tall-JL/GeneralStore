@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using PagedList;
 
 namespace GeneralStoreAPI.Controllers
 {
@@ -50,34 +51,34 @@ namespace GeneralStoreAPI.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IHttpActionResult> Get()
-        {
-            var transactions = await _context.Transactions.ToListAsync();
-
-            return Ok(transactions);
-        }
-
         //[HttpGet]
-        //public async Task<IHttpActionResult> GetAll([FromUri] int pageNumber)
+        //public async Task<IHttpActionResult> Get()
         //{
         //    var transactions = await _context.Transactions.ToListAsync();
 
-
-
-        //    if (pageNumber >= 1 && pageNumber != default)
-        //    {
-        //        int pageSize = 5;
-        //        var result = transactions.Skip(pageNumber * pageSize).Take(pageSize);
-        //        foreach (var trans in result)
-        //        {
-        //            return Ok($"{trans.CustomerId}");
-
-        //        }
-        //    }
-        //    return NotFound();
-
+        //    return Ok(transactions);
         //}
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAll([FromUri] int pageNumber)
+        {
+            var transactions = await _context.Transactions.ToListAsync();
+
+            if (pageNumber >= 1 && pageNumber != default)
+            {
+                int pageSize = 5;
+                var result = transactions.Skip(pageNumber * pageSize).Take(pageSize);
+                foreach (var trans in result)
+                {
+                    //return View(transactions.ToPagedList(pageNumber, pageSize));
+                    
+                    return Ok($"{trans.Id}");
+
+                }
+            }
+            return NotFound();
+
+        }
 
         [HttpGet]
         public async Task<IHttpActionResult> Get([FromUri] int id)

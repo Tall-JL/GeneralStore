@@ -234,3 +234,7 @@ C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\obj\Debug\GeneralStoreA
 C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\obj\Debug\GeneralStoreAPI.csproj.CopyComplete
 C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\obj\Debug\GeneralStoreAPI.dll
 C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\obj\Debug\GeneralStoreAPI.pdb
+C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\bin\PagedList.dll
+C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\bin\PagedList.Mvc.dll
+C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\bin\PagedList.xml
+C:\Users\bigja\Source\Repos\GeneralStore\GeneralStoreAPI\bin\PagedList.Mvc.xml
