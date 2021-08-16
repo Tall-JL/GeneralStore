@@ -95,6 +95,27 @@ namespace GeneralStoreAPI.Controllers
             }
             return Ok(transaction);
         }
+        
+        [HttpGet]
+        public async Task<IHttpActionResult> GetByCustomerID([FromUri] int customerID)
+        {
+            if (customerID < 1)
+            {
+                return BadRequest();
+
+            }
+
+            foreach (var transaction in _context.Transactions)
+            {
+                if ( transaction.Id == customerID)
+                {
+                    //var result = await _context.Transactions.FindAsync(transaction.Id);
+                    return Ok(transaction);
+                }
+                
+            }
+            return null;
+        }
 
     }
 }

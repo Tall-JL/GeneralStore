@@ -44,28 +44,75 @@ namespace GeneralStoreAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> GetAll()
         {
             var products = await _context.Products.ToListAsync();
 
             return Ok(products);
         }
 
-        [HttpGet]
-        public async Task<IHttpActionResult> Get(int id)
+        [Route("GetOutOfStock"), HttpGet]
+        public async Task<IHttpActionResult> GetOutOfStock()
         {
-            if (id < 1)
+
+            foreach (var product in _context.Products)
+            {
+                if (product.IsInStock == false)
+                {
+                    //var result = await _context.Products.FindAsync(product);
+                    return Ok(product);
+                }
+            }
+            return null;
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> Get(string sku)
+        {
+            if (sku is null)
             {
                 return BadRequest();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(sku);
 
             if (product is null)
             {
                 return NotFound();
             }
             return Ok(product);
+        }
+
+        [HttpPut]
+        public async Task<IHttpActionResult> Put([FromBody] Product newProductData, [FromUri] string sku)
+        {
+            if (newProductData.SKU != sku || newProductData is null)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var product = await _context.Products.FindAsync(sku);
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            product.SKU = newProductData.SKU;
+            product.Name = newProductData.Name;
+            product.Cost = newProductData.Cost;
+            product.NumberInInventory = newProductData.NumberInInventory;
+
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                return Ok();
+            }
+
+            return InternalServerError();
         }
     }
 }
